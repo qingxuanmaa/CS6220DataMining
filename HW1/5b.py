@@ -21,20 +21,19 @@ def ids_of_movies(filenames):
     
 
     print(min_user_id)
-      
+    
     favorite_movie_ids = set()
     for filename in filenames:
         with open(filename, 'r') as file:
             movie_id = None
             for row in file:
-                if row.endswith(':'):
-                    print(row)
-                    movie_id = row[:-1].strip()
-                    print(movie_id)
-                elif '-' in row: 
+                if ':' in row:
+                    movie_id = row.split(":")[0].strip()
+                    # print(movie_id)
+                else:
                     user_id = row.split(',')[0]
                     rating = row.split(',')[1]
-                    if user_id == min_user_id and rating == '5':
+                    if int(user_id) == min_user_id and rating == '5':
                         favorite_movie_ids.add(movie_id)
     return favorite_movie_ids
     
