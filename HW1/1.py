@@ -4,7 +4,8 @@ def cardinality_items(filename):
     with open(filename, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
         for row in csv_reader:
-            l = row.split(',')
-            for item in l:
-                items.add(item)
+            for item in row:
+                items.add(item.strip())
     print("The cardinality is: ", len(items))
+    
+cardinality_items("basket_data.csv")
